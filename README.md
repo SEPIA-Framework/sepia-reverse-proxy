@@ -5,6 +5,8 @@ This is a tiny reverse proxy made completely in Java and based on Undertow. It w
 
 ```java
 //Create tiny reverse proxy
+int port = 20726;
+String host = "localhost";
 TinyReverseProxy reverseProxy = new TinyReverseProxy(host, port);
 
 //Add paths - SEPIA defaults for custom-bundle:
@@ -16,4 +18,6 @@ reverseProxy.addPrefixPath("/sepia/chat", "http://localhost:20723");
 reverseProxy.start();
 ```
 
-Be sure to check-out the source to tweak the number of possible threads for more performance.
+Be sure to check-out the source to tweak the number of possible threads for more performance.  
+
+Good to know: Thanks to Undertow it also works as with WebSocket servers out-of-the-box :-)

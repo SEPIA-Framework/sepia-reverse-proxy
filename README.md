@@ -20,4 +20,4 @@ reverseProxy.start();
 
 Be sure to check-out the source to tweak the number of possible threads for more performance.  
 
-Good to know: Thanks to Undertow it also works as with WebSocket servers out-of-the-box :-)
+Good to know: Thanks to Undertow it also works as proxy for WebSocket servers out-of-the-box :-)

@@ -4,10 +4,8 @@ import java.net.URI;
 import java.util.HashMap;
 import java.util.Map;
 
-import io.undertow.Handlers;
 import io.undertow.Undertow;
 import io.undertow.Undertow.Builder;
-import io.undertow.server.handlers.PathHandler;
 import io.undertow.server.handlers.proxy.LoadBalancingProxyClient;
 import io.undertow.server.handlers.proxy.ProxyHandler;
 import io.undertow.util.Headers;
@@ -53,7 +51,8 @@ public class TinyReverseProxy {
                 .addHttpListener(this.port, this.host)
                 .setIoThreads(IO_THREADS);
 		
-		PathHandler pathHandler = Handlers.path();
+		//PathHandler pathHandler = Handlers.path();
+		PathHandlerWithIpFilter pathHandler = new PathHandlerWithIpFilter();
 		pathHandler.addExactPath("/", (exchange) -> {
         	exchange.getResponseHeaders().put(Headers.CONTENT_TYPE, "text/plain");
             exchange.getResponseSender().send("SEPIA reverse-proxy powered by Undertow");
@@ -65,7 +64,8 @@ public class TinyReverseProxy {
 			pathHandler.addExactPath(path,	
 				ProxyHandler.builder()
 					.setProxyClient(prefixMappings.get(path))
-					.setMaxRequestTime(MAX_REQ_TIME).build()
+					.setMaxRequestTime(MAX_REQ_TIME)
+					.build()
 			);
 		}
 		//Prefix-paths
@@ -74,7 +74,8 @@ public class TinyReverseProxy {
 			pathHandler.addPrefixPath(path,	
 				ProxyHandler.builder()
 					.setProxyClient(prefixMappings.get(path))
-					.setMaxRequestTime(MAX_REQ_TIME).build()
+					.setMaxRequestTime(MAX_REQ_TIME)
+					.build()
 			);
 		}
 		proxyBuilder.setHandler(pathHandler);

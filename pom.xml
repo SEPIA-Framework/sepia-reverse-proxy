@@ -2,7 +2,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>net.b07z.sepia.proxies</groupId>
 	<artifactId>sepia-reverse-proxy</artifactId>
-	<version>0.1.0</version>
+	<version>0.3.0</version>
 	<packaging>jar</packaging>
 
     <properties>
@@ -20,13 +20,13 @@
 				<executions>
 					<execution>
 						<id>copy-dependencies</id>
-						<phase>prepare-package</phase>
+						<phase>install</phase>
 						<goals>
 							<goal>copy-dependencies</goal>
 						</goals>
 						<configuration>
 							<outputDirectory>
-								${project.build.directory}/libs
+								${project.build.directory}/build/libs
 							</outputDirectory>
 						</configuration>
 					</execution>
@@ -49,6 +49,46 @@
 					<finalName>sepia-reverse-proxy-v${project.version}</finalName>
 				</configuration>
 			</plugin>
+			<plugin>
+				<artifactId>maven-resources-plugin</artifactId>
+				<version>3.1.0</version>
+				<executions>
+					<execution>
+						<id>copy-resources-1</id>
+						<phase>install</phase>
+						<goals>
+							<goal>copy-resources</goal>
+						</goals>
+						<configuration>
+							<outputDirectory>${project.build.directory}/build/settings</outputDirectory>
+							<resources>          
+								<resource>
+									<directory>settings</directory>
+									<!--<filtering>true</filtering>-->
+								</resource>
+							</resources>              
+						</configuration>            
+					</execution>
+					<execution>
+						<id>copy-resources-2</id>
+						<phase>install</phase>
+						<goals>
+							<goal>copy-resources</goal>
+						</goals>
+						<configuration>
+							<outputDirectory>${project.build.directory}/build</outputDirectory>
+							<resources>          
+								<resource>
+									<directory>${project.build.directory}</directory>
+									<includes>
+										<include>*.jar</include>
+									</includes>
+								</resource>
+							</resources>              
+						</configuration>            
+					</execution>
+				</executions>
+			</plugin>
 		</plugins>
 	</build>
   
@@ -58,5 +98,11 @@
 	    	<artifactId>undertow-core</artifactId>
 			<version>2.0.1.Final</version>
 		</dependency>
+		
+		<dependency>
+	        <groupId>org.slf4j</groupId>
+	        <artifactId>slf4j-simple</artifactId>
+	        <version>1.7.21</version>
+	    </dependency>
   	</dependencies>
 </project>

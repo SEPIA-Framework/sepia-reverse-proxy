@@ -27,10 +27,11 @@ public class TestSimpleReverseProxy {
 		TinyReverseProxy reverseProxy = new TinyReverseProxy("localhost", 9212);
 		
 		//Add paths
-		reverseProxy.addPrefixPath("/one", "http://localhost:9213");
-		reverseProxy.addPrefixPath("/two", "http://localhost:9214");
-		reverseProxy.addPrefixPath("/sepia/three", "http://localhost:9213");
-		reverseProxy.addPrefixPath("/sepia/four", "http://localhost:9214");
+		boolean isPublic = true;
+		reverseProxy.addPrefixPath("/one", "http://localhost:9213", isPublic);
+		reverseProxy.addPrefixPath("/two", "http://localhost:9214", isPublic);
+		reverseProxy.addPrefixPath("/sepia/three", "http://localhost:9213", isPublic);
+		reverseProxy.addPrefixPath("/sepia/four", "http://localhost:9214", isPublic);
 		
 		//Start proxy
 		reverseProxy.start();

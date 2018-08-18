@@ -2,7 +2,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>net.b07z.sepia.proxies</groupId>
 	<artifactId>sepia-reverse-proxy</artifactId>
-	<version>0.2.0</version>
+	<version>0.3.0</version>
 	<packaging>jar</packaging>
 
     <properties>
@@ -20,7 +20,7 @@
 				<executions>
 					<execution>
 						<id>copy-dependencies</id>
-						<phase>prepare-package</phase>
+						<phase>install</phase>
 						<goals>
 							<goal>copy-dependencies</goal>
 						</goals>
@@ -55,7 +55,7 @@
 				<executions>
 					<execution>
 						<id>copy-resources-1</id>
-						<phase>validate</phase>
+						<phase>install</phase>
 						<goals>
 							<goal>copy-resources</goal>
 						</goals>
@@ -71,7 +71,7 @@
 					</execution>
 					<execution>
 						<id>copy-resources-2</id>
-						<phase>validate</phase>
+						<phase>install</phase>
 						<goals>
 							<goal>copy-resources</goal>
 						</goals>
@@ -98,5 +98,11 @@
 	    	<artifactId>undertow-core</artifactId>
 			<version>2.0.1.Final</version>
 		</dependency>
+		
+		<dependency>
+	        <groupId>org.slf4j</groupId>
+	        <artifactId>slf4j-simple</artifactId>
+	        <version>1.7.21</version>
+	    </dependency>
   	</dependencies>
 </project>

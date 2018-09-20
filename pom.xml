@@ -2,8 +2,15 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>net.b07z.sepia.proxies</groupId>
 	<artifactId>sepia-reverse-proxy</artifactId>
-	<version>0.3.0</version>
+	<version>0.3.1</version>
 	<packaging>jar</packaging>
+	
+	<licenses>
+		<license>
+			<name>MIT License</name>
+			<url>http://www.opensource.org/licenses/mit-license.php</url>
+		</license>
+  	</licenses>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -20,14 +27,13 @@
 				<executions>
 					<execution>
 						<id>copy-dependencies</id>
-						<phase>install</phase>
+						<phase>package</phase>
 						<goals>
 							<goal>copy-dependencies</goal>
 						</goals>
 						<configuration>
-							<outputDirectory>
-								${project.build.directory}/build/libs
-							</outputDirectory>
+							<outputDirectory>${project.build.directory}/release/libs</outputDirectory>
+							<includeScope>runtime</includeScope>
 						</configuration>
 					</execution>
 				</executions>
@@ -46,6 +52,7 @@
 							</mainClass>
 						</manifest>
 					</archive>
+					<outputDirectory>${project.build.directory}/release</outputDirectory>
 					<finalName>sepia-reverse-proxy-v${project.version}</finalName>
 				</configuration>
 			</plugin>
@@ -55,12 +62,12 @@
 				<executions>
 					<execution>
 						<id>copy-resources-1</id>
-						<phase>install</phase>
+						<phase>package</phase>
 						<goals>
 							<goal>copy-resources</goal>
 						</goals>
 						<configuration>
-							<outputDirectory>${project.build.directory}/build/settings</outputDirectory>
+							<outputDirectory>${project.build.directory}/release/settings</outputDirectory>
 							<resources>          
 								<resource>
 									<directory>settings</directory>
@@ -71,17 +78,17 @@
 					</execution>
 					<execution>
 						<id>copy-resources-2</id>
-						<phase>install</phase>
+						<phase>package</phase>
 						<goals>
 							<goal>copy-resources</goal>
 						</goals>
 						<configuration>
-							<outputDirectory>${project.build.directory}/build</outputDirectory>
+							<outputDirectory>${project.build.directory}/release</outputDirectory>
 							<resources>          
 								<resource>
-									<directory>${project.build.directory}</directory>
+									<directory>scripts</directory>
 									<includes>
-										<include>*.jar</include>
+										<include>*.*</include>
 									</includes>
 								</resource>
 							</resources>              
@@ -104,5 +111,12 @@
 	        <artifactId>slf4j-simple</artifactId>
 	        <version>1.7.21</version>
 	    </dependency>
+	    
+	    <dependency>
+      		<groupId>junit</groupId>
+      		<artifactId>junit</artifactId>
+      		<version>4.12</version>
+      		<scope>test</scope>
+    	</dependency>
   	</dependencies>
 </project>

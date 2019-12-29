@@ -113,7 +113,7 @@ public class Start {
 				System.exit(1);
 			}else if (ssl){
 				try{
-					ks = SSLContextBuilder.loadKeyStore(sslKeystore, sslKeystorePwd);
+					ks = SSLContextBuilder.loadKeyStore("JKS", sslKeystore, sslKeystorePwd);	//TODO: use JKS, PKCS12 or default?
 				}catch (Exception e){
 					error("Could not load keystore located at: " + sslKeystore + " - check path and password!");
 					error("Error msg.: " + e.getMessage());

@@ -1,6 +1,8 @@
 # SEPIA Reverse-Proxy
 Part of the [SEPIA Framework](https://sepia-framework.github.io/)  
-
+  
+**NOTE:** Development on this tool was frozen in favor of global Nginx support throughout all SEPIA components. Occasional security updates might be uploaded though.  
+  
 This is a tiny reverse proxy made completely in Java and based on Undertow. It was primarily built to work as a cross-platform, lightweight proxy for the [SEPIA custom-bundle](https://github.com/SEPIA-Framework/sepia-installation-and-setup) but can easily be adapted for any other project:
 
 ```java
